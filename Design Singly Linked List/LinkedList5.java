@@ -11,19 +11,19 @@ class ListNode{
         this.next = next;
     }
 }
-class LinkedList {
+class LinkedList {  
     private ListNode head;
     private ListNode tail;
-    
+
     public LinkedList() {
         this.head = new ListNode(-1);
         this.tail = this.head;
     }
 
     public int get(int index) {
-        ListNode curr = this.head.next;
+        ListNode curr = head.next;
         int i = 0;
-        while(i < index && curr != null){
+        while(curr != null){
             if(i == index){
                 return curr.val;
             }
@@ -40,7 +40,7 @@ class LinkedList {
         if(newNode.next == null){
             this.tail = newNode;
         }
-    }   
+    }
 
     public void insertTail(int val) {
         this.tail.next = new ListNode(val);
@@ -56,7 +56,7 @@ class LinkedList {
         }
         if(curr != null && curr.next != null){
             if(curr.next == tail){
-                this.tail = curr;
+                tail = curr;
             }
             curr.next = curr.next.next;
             return true;
@@ -72,5 +72,5 @@ class LinkedList {
             curr = curr.next;
         }
         return res;
-    }
+    }   
 }
