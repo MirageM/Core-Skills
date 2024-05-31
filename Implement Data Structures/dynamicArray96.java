@@ -1,77 +1,50 @@
-class ListNode{
-    int val;
-    ListNode next;
+class DynamicArray {
+    private int capacity;
+    private int length;
+    private int[] arr;
 
-    public ListNode(int val){
-        this(val, null);
+    public DynamicArray(int capacity) {
+        this.capacity = capacity;
+        this.length = 0;
+        this.arr = new int[capacity];
     }
 
-    public ListNode(int val, ListNode next){
-        this.val = val;
-        this.next = next;
-    }
-}
-class LinkedList {
-    private ListNode head;
-    private ListNode tail;
-
-
-    public LinkedList() {
-        this.head = new ListNode(-1);
-        this.tail = this.head;
+    public int get(int i) {
+        return this.arr[i];
     }
 
-    public int get(int index) {
-        int i = 0;
-        ListNode curr = this.head.next;
-        while(curr != null){
-            if(i == index){
-                return curr.val;
-            }
-            curr = curr.next;
-            i++;
+    public void set(int i, int n) {
+        this.arr[i] = n;
+    }
+
+    public void pushback(int n) {
+        if(length == capacity){
+            resize();
         }
-        return -1;
+        this.arr[length++] = n;
     }
 
-    public void insertHead(int val) {
-        ListNode newNode = new ListNode(val);
-        newNode.next = this.head.next;
-        this.head.next = newNode;
-        if(newNode.next == null){
-            tail = newNode;
+    public int popback() {
+        if(length > 0){
+            length--;
         }
+        return this.arr[length];
     }
 
-    public void insertTail(int val) {
-        this.tail.next = new ListNode(val);
-        this.tail = this.tail.next;
+    private void resize() {
+        capacity *= 2;
+        int[] newArr = new int[capacity];
+        for(int i = 0; i < length; i++){
+            newArr[i] = arr[i];
+        }
+        arr = newArr;
+    }   
+
+    public int getSize() {
+        return length;
     }
 
-    public boolean remove(int index) {
-        int i = 0;
-        ListNode curr = this.head;
-        while(i < index && curr != null){
-            curr = curr.next;
-            i++;
-        }
-        if(curr != null && curr.next != null){
-            if(curr.next == this.tail){
-                this.tail = curr;
-            }
-            curr.next = curr.next.next;
-            return true;
-        }
-        return false;
-    }
-
-    public ArrayList<Integer> getValues() {
-        ArrayList<Integer> res = new ArrayList<>();
-        ListNode curr = this.head.next;
-        while(curr != null){
-            res.add(curr.val);
-            curr = curr.next;
-        }
-        return res;
+    public int getCapacity() {
+        return capacity;
     }
 }
