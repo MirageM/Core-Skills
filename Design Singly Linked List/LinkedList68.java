@@ -21,7 +21,7 @@ class LinkedList {
     public int get(int index) {
         int i = 0;
         ListNode curr = this.head.next;
-        while(i < index && curr != null){
+        while(curr != null){
             if(i == index){
                 return curr.val;
             }
