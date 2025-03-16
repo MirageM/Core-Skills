@@ -35,7 +35,7 @@ class DynamicArray {
         capacity *= 2;
         int[] newArr = new int[capacity];
         for(int i = 0; i < length; i++){
-            arr[i] = newArr[i];
+            newArr[i] = arr[i];
         }
         arr = newArr;
     }
